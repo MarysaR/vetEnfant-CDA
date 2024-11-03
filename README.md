@@ -3,7 +3,7 @@
   CLI
   
   - git clone lien du repo
-  - npm icomposer install
+  - npm composer install
   - npm run build
   - symfony serve -d
 
