@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
+use App\Entity\Category;
 use App\Enum\Gender;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -18,6 +19,7 @@ class ProductFixtures extends Fixture
       'description' => 'Une robe légère et élégante pour les filles.',
       'isSold' => false,
       'createDate' => '2023-01-15',
+      'category' => 'Fille',
     ],
     [
       'name' => 'Pantalon en Denim',
@@ -27,6 +29,7 @@ class ProductFixtures extends Fixture
       'description' => 'Un pantalon résistant et stylé pour les garçons.',
       'isSold' => true,
       'createDate' => '2023-02-10',
+      'category' => 'Garçon',
     ],
     [
       'name' => 'T-shirt Unisexe',
@@ -36,6 +39,7 @@ class ProductFixtures extends Fixture
       'description' => 'Un T-shirt confortable pour tout le monde.',
       'isSold' => false,
       'createDate' => '2023-03-01',
+      'category' => 'Mixte',
     ],
   ];
 
@@ -50,6 +54,14 @@ class ProductFixtures extends Fixture
       $product->setDescription($productData['description']);
       $product->setSold($productData['isSold']);
       $product->setCreateDate(new \DateTime($productData['createDate']));
+      $category = $manager->getRepository(Category::class)->findOneBy(['name' => $productData['category']]);
+      $product->setCategory($category);
+
+      $category = $manager->getRepository(Category::class)->findOneBy(['name' => $productData['category']]);
+      if (!$category) {
+        throw new \Exception("Category '{$productData['category']}' not found in the database.");
+      }
+      $product->setCategory($category);
 
       // dump($product);
 

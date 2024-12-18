@@ -36,6 +36,10 @@ class Product
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $createDate = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +124,18 @@ class Product
     public function setCreateDate(\DateTimeInterface $createDate): static
     {
         $this->createDate = $createDate;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
