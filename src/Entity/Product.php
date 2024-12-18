@@ -19,7 +19,7 @@ class Product
     private ?string $name = null;
 
     #[ORM\Column(type: 'string', enumType: Gender::class)]
-    private ?string $gender = null;
+    private ?Gender $gender = null;
 
     #[ORM\Column]
     private ?float $price = null;
@@ -53,15 +53,14 @@ class Product
         return $this;
     }
 
-    public function getGender(): ?string
+    public function getGender(): ?Gender
     {
         return $this->gender;
     }
 
-    public function setGender(string $gender): static
+    public function setGender(Gender $gender): static
     {
         $this->gender = $gender;
-
         return $this;
     }
 
