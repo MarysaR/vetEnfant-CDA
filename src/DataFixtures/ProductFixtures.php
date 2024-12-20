@@ -20,7 +20,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
       'description' => 'Une robe légère et élégante pour les filles.',
       'isSold' => false,
       'createDate' => '2023-01-15',
-      'category' => 'category_Action',
+      'category' => 'category_Fille',
     ],
     [
       'name' => 'Pantalon en Denim',
@@ -30,7 +30,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
       'description' => 'Un pantalon résistant et stylé pour les garçons.',
       'isSold' => true,
       'createDate' => '2023-02-10',
-      'category' => 'category_Action',
+      'category' => 'category_Garçon',
     ],
     [
       'name' => 'T-shirt Unisexe',
@@ -40,7 +40,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
       'description' => 'Un T-shirt confortable pour tout le monde.',
       'isSold' => false,
       'createDate' => '2023-03-01',
-      'category' => 'category_Action',
+      'category' => 'category_Mixte',
     ],
   ];
 
@@ -61,7 +61,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         throw new \RuntimeException("La référence '{$categoryReference}' n'a pas été trouvée. Vérifiez vos CategoryFixtures.");
       }
 
-      $product->setCategory($this->getReference('category_Action', Category::class));
+      $product->setCategory($this->getReference($categoryReference));
 
 
       $manager->persist($product);
