@@ -22,6 +22,7 @@ class CategoryFixtures extends Fixture
       $category->setDescription("Description pour la catégorie $categoryName");
 
       $manager->persist($category);
+      $this->addReference('category_' . $categoryName, $category);
     }
 
     $manager->flush();
